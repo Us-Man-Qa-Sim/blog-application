@@ -1,28 +1,25 @@
+import { UserEntity } from './users.entity';
 import { IUser, UsersService } from './users.service';
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-
 @Controller('users')
 export class UsersController {
   constructor(
-    private userService: UsersService
+    private readonly userService: UsersService
   ) { }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<IUser> {
-    const user = await this.userService.findOne(id);
-    return user;
+  async findOne(@Param('id') id: number): Promise<UserEntity> {
+    return await this.userService.findOne(id);
   }
 
   @Get()
-  async find(): Promise<IUser[]> {
-    const users = await this.userService.find();
-    return users;
+  async find(): Promise<UserEntity[]> {
+    return await this.userService.find();
   }
 
   @Post()
-  async createOne(@Body() body: IUser): Promise<IUser[]> {
-    const users = await this.userService.createOne(body);
-    return users;
+  async createOne(@Body() body: UserEntity): Promise<UserEntity> {
+    return await this.userService.createOne(body);
   }
 
   @Delete(":id")
