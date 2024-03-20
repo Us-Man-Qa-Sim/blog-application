@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { RoleEntity } from './../roles/roles.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -31,4 +32,7 @@ export class UserEntity {
 
   @Column({ default: false })
   isActive: boolean;
+
+  @OneToMany(() => RoleEntity, role => role.user)
+  roles: RoleEntity[];
 }
