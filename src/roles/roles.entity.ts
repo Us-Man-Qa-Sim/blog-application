@@ -1,17 +1,17 @@
-import { UserEntity } from './../users/users.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { UserEntity } from 'src/entities';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 
 @Entity({ name: 'roles' })
 export class RoleEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 200 })
   title: string;
 
   @Column({ default: false })
   isActive: boolean;
 
-  @ManyToOne(() => UserEntity, user => user.roles)
-  user: UserEntity;
+  @ManyToMany(() => UserEntity, user => user.roles)
+  users: UserEntity[];
 }

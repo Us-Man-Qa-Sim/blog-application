@@ -1,23 +1,26 @@
-import { Injectable } from '@nestjs/common';
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { CommentsEntity, UserEntity } from 'src/entities';
+import { Column, ManyToOne, PrimaryGeneratedColumn, OneToMany, Entity } from 'typeorm';
 
-@Injectable()
+@Entity({ name: 'blogs' })
 export class BlogsEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 200 })
   image: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 200 })
   title: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 5000 })
   description: string;
 
   @Column({ default: false })
   isDeleted: boolean;
 
-  // relation with user
+  @ManyToOne(() => UserEntity, user => user.blogs)
+  user: UserEntity;
 
+  @OneToMany(() => CommentsEntity, comment => comment.user)
+  comments: CommentsEntity[];
 }
