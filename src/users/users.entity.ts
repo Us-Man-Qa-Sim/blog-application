@@ -1,6 +1,7 @@
+import { RoleEntity } from './../roles/roles.entity';
+import { BlogsEntity } from './../blogs/blogs.entity';
 import { PasswordTransformer } from './password.transformer';
-import { BlogsEntity } from 'src/blogs/blogs.entity';
-import { CommentsEntity, RoleEntity } from 'src/entities';
+import { CommentsEntity } from './../comments/comments.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity({ name: 'users' })

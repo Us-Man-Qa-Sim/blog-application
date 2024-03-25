@@ -1,5 +1,6 @@
-import { DataSource, DataSourceOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
+import { SeederOptions } from 'typeorm-extension';
+import { DataSource, DataSourceOptions } from 'typeorm';
 
 dotenv.config();
 export const dataSourceOptions: DataSourceOptions = {
@@ -12,10 +13,11 @@ export const dataSourceOptions: DataSourceOptions = {
   synchronize: false,
 };
 
-export const dataSourceMigrations: DataSourceOptions = {
+export const dataSourceMigrations: DataSourceOptions & SeederOptions = {
   ...dataSourceOptions,
   entities: ['src/**/*.entity.ts'],
   migrations: ['src/migrations/*.ts'],
+  seeds: ['src/seeders/*.seeder.ts'],
 };
 
 export const dataSource = new DataSource(dataSourceMigrations);

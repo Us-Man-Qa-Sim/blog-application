@@ -1,4 +1,5 @@
-import { BlogsEntity, UserEntity } from 'src/entities';
+import { UserEntity } from './../users/users.entity';
+import { BlogsEntity } from './../blogs/blogs.entity';
 import { Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, Entity } from 'typeorm';
 
 @Entity({ name: 'comments' })
